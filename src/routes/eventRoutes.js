@@ -14,8 +14,8 @@ router.get('/events', authenticateUser, eventCtrl.fetchAllEvents);
 router.get('/events/:id', authenticateUser, eventCtrl.fetchSingleEvent);
 
 // PUT request /events/:id to Update a single event
-router.put('/events/:id', authenticateUser, eventCtrl.updateSingleEvent);
+router.put('/events/:id', authenticateUser, checkIfAdmin, eventCtrl.updateSingleEvent);
 
 // DELETE request /events/:id to Destroy a single event
-router.delete('/events/:id', authenticateUser, eventCtrl.deleteSingleEvent);
+router.delete('/events/:id', authenticateUser, checkIfAdmin, eventCtrl.deleteSingleEvent);
 module.exports = router;
