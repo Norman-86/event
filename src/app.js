@@ -3,6 +3,8 @@ const app = express();
 const db = require('./database/db')
 const eventRoutes = require('./routes/eventRoutes');
 const authRoutes = require('./routes/authRoutes');
+const { seedAdmin } = require('./seeders/admin');
+// console.log(seedAdmin())
 //set up express to pick req.body
 app.use(express.json());
 //require routes

@@ -19,7 +19,7 @@ exports.registerNewUser = (req, res) => {
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             username: req.body.username,
-            email: req.body.email
+            email: req.body.email,
         }, (err, newUser) => {
             if (err) {
                 return res.status(500).json({ err })
@@ -45,7 +45,8 @@ exports.registerNewUser = (req, res) => {
                             first_name: newUser.first_name,
                             last_name: newUser.last_name,
                             username: newUser.username,
-                            email: newUser.email
+                            email: newUser.email,
+                            role: newUser.role
                         }, secret, { expiresIn: expiry }, (err, token) => {
                             if (err) {
                                 return res.status(500).json({ err })
@@ -80,7 +81,8 @@ exports.loginUser = (req, res) => {
             first_name: foundUser.first_name,
             last_name: foundUser.last_name,
             username: foundUser.username,
-            email: foundUser.email
+            email: foundUser.email,
+            role: foundUser.role
         }, secret, { expiresIn: expiry }, (err, token) => {
             if (err) {
                 return res.status(500).json({ err })
