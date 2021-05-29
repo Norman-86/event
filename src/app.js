@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const db = require('./database/db')
+const db = require('./database/db');
+const axios = require('axios');
 const eventRoutes = require('./routes/eventRoutes');
 const authRoutes = require('./routes/authRoutes');
 const { seedAdmin } = require('./seeders/admin');

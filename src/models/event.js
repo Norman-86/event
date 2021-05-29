@@ -17,6 +17,9 @@ const eventSchema = new mongoose.Schema({
         required: true,
         lowercase: true,
         enum: ['business', 'casual', 'party', 'general']
+    },
+    image: {
+        type: String
     }
 });
 

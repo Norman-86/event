@@ -19,6 +19,17 @@ exports.fetchAllEvents = (req, res) => {
     if (req.query.category) {
         searchConditions.category = req.query.category
     }
+    if (req.query.image) {
+        searchConditions.image = req.query.image
+    }
+    //image API
+    axios.get(`https://imagegen.herokuapp.com/?=${category}`)
+        .then(data => {
+            return res.status(200).json({ image });
+        })
+        .catch(err => {
+        return res.status(500).json({err})
+    }) 
     EVENT.find(searchConditions, (err, events) => {
         if (err) {
             return res.status(500).json({ message: 'an error has occurred', err })
