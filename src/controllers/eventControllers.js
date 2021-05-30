@@ -20,11 +20,12 @@ exports.fetchAllEvents = (req, res) => {
     if (req.query.category) {
         searchConditions.category = req.query.category
     }
-    // if (req.query.image) {
-    //     searchConditions.category = req.query.image
-    // }
+    if (req.query.image) {
+        searchConditions.image = req.query.image
+    }
        //image url API
-    axios.get('https://imagegen.herokuapp.com/?category=event_category')
+    let event_category = 'regular' || 'business' || 'casual' || 'party'
+    axios.get(`https://imagegen.herokuapp.com/?${category=event_category}`)
         .then(res => {
             console.log(res.data.image)
         })
