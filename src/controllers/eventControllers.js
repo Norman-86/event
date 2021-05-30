@@ -7,6 +7,16 @@ exports.createNewEvent = (req, res) => {
         if (err) {
             return res.status(500).json({ message: 'an error has occurred', err })
         } else {
+            //image url using external api
+            let category = newEvent.category
+            axios.get(`https://imagegen.herokuapp.com/?category=${category}`)
+                .then(res => {
+                    newEvent.image = res.data.image
+                    newEvent.save()
+                })
+                .catch(err => {
+                    console.log(err)
+                })
             return res.status(200).json({ message: 'new event created', newEvent })
         }
     })
@@ -23,15 +33,6 @@ exports.fetchAllEvents = (req, res) => {
     if (req.query.image) {
         searchConditions.image = req.query.image
     }
-       //image url API
-    let event_category = 'regular' || 'business' || 'casual' || 'party'
-    axios.get(`https://imagegen.herokuapp.com/?${category=event_category}`)
-        .then(res => {
-            console.log(res.data.image)
-        })
-        .catch(err => {
-            console.log(err)
-    }) 
     EVENT.find(searchConditions, (err, events) => {
         if (err) {
             return res.status(500).json({ message: 'an error has occurred', err })
@@ -59,7 +60,8 @@ exports.updateSingleEvent = (req, res) => {
     EVENT.findByIdAndUpdate(req.params.id, {
         title: req.body.title,
         cost: req.body.cost,
-        category: req.body.category
+        category: req.body.category,
+        image: req.body.image
     }, (err, event) => {
         if (err) {
             return res.status(500).json({ message: 'error has occurred', err })
