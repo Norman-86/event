@@ -1,4 +1,5 @@
 const EVENT = require('../models/event');
+const axios = require('axios');
 exports.createNewEvent = (req, res) => {
     EVENT.create({
         ...req.body
@@ -19,10 +20,13 @@ exports.fetchAllEvents = (req, res) => {
     if (req.query.category) {
         searchConditions.category = req.query.category
     }
+    // if (req.query.image) {
+    //     searchConditions.category = req.query.image
+    // }
        //image url API
-    axios.get('https://imagegen.herokuapp.com/?=category=event_category')
+    axios.get('https://imagegen.herokuapp.com/?category=event_category')
         .then(res => {
-           console.log(res.data.image)
+            console.log(res.data.image)
         })
         .catch(err => {
             console.log(err)
