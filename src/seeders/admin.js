@@ -20,9 +20,9 @@ exports.seedAdmin = () => {
             if (err) throw err;
             bcrypt.genSalt(10, (err, salt) => {
                 if (err) throw err;
-                bcrypt.hash(password, salt, (err, hashedPassword) => {
+                bcrypt.hash(password, salt, (err, hash) => {
                     if (err) throw err;
-                    user.password = hashedPassword;
+                    user.password = hash;
                     user.save((err, savedUser) => {
                         if (err) throw err;
                         return 'admin account created successfully'
