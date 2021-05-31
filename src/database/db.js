@@ -1,6 +1,6 @@
 //import mongoose & connect to MongoDB
 const mongoose = require('mongoose');
-const connectionString = 'mongodb://localhost:27017/eventManagement'
+const connectionString = process.env.DB_URL;
 //mongodb+srv://the-park:vision2030@cluster0.6ph19.mongodb.net/eventManagement?retryWrites=true&w=majority
 module.exports = function () {
     mongoose.connect(connectionString, {
